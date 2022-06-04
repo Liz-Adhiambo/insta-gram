@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'assets/images/favicon.png' %}" rel="icon" type="image/png">
-    <title>Sign Up - Instagram</title>
+    <title>Sign In - Instagram</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
@@ -32,12 +32,12 @@
                 <div class="flex items-center lg:justify-between justify-around">
 
                     <a href="trending.html">
-                        <b><h1 style="font-size: 1.5rem;"></h1>Instagram</b>
+                       <b><h1 style="font-size: 1.5rem;">Instagram</h1></b>
                     </a>
 
                     <div class="capitalize flex font-semibold hidden lg:block my-2 space-x-3 text-center text-sm">
                         
-                        <a href="/signin" class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Login</a>
+                        <a href="/signup" class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Register</a>
                     </div>
 
                 </div>
@@ -45,12 +45,10 @@
         </div>
 
         <!-- Content-->
-
         <div>
             <div class="lg:p-12 max-w-md max-w-xl lg:my-0 my-12 mx-auto p-6 space-y-">
-                <h1 class="lg:text-3xl text-xl font-semibold mb-6"> Sign Up</h1>
-                <!--<p class="mb-2 text-black text-lg"> Register to manage your account </p>-->
-                
+                <h1 class="lg:text-3xl text-xl font-semibold  mb-6"> Log in</h1>
+
 
                 <div>
                     <style>
@@ -62,28 +60,16 @@
                     <h5>{{message}}</h5>
                     {% endfor %}
                 </div>
-                
-                
+
+
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <!--<div class="flex lg:flex-row flex-col lg:space-x-2">
-                        <input type="text" placeholder="First Name"  class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                        <input type="text" placeholder="Last Name" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                    </div>-->
-                    <input type="text" name="username" placeholder="Username" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                    <input type="email" name="email" placeholder="Email" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                    <input type="password" name="password" placeholder="Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                    <input type="password" name="password2" placeholder="Confirm Password" class="bg-gray-200 mb-2 shadow-none  dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
-                    <!-- <div class="flex justify-start my-4 space-x-1">
-                        <div class="checkbox">
-                            <input type="checkbox" id="chekcbox1" checked>
-                            <label for="chekcbox1"><span class="checkbox-icon"></span> I Agree</label>
-                        </div>
-                        <a href="#"> Terms and Conditions</a>
-                    </div> -->
-                    <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Sign Up</button>
+                    <input type="text" name="username" placeholder="Username" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                    <input type="password" name="password" placeholder="Password" class="bg-gray-200 mb-2 shadow-none dark:bg-gray-800" style="border: 1px solid #d3d5d8 !important;">
+                    
+                    <button type="submit" class="bg-gradient-to-br from-pink-500 py-3 rounded-md text-white text-xl to-red-400 w-full">Login</button>
                     <div class="text-center mt-5 space-x-2">
-                        <p class="text-base"> Do you have an account? <a href="{%url 'signin'%}"> Login </a></p>
+                        <p class="text-base"> Not registered? <a href="/signup" class=""> Create a account </a></p>
                     </div>
                 </form>
 
@@ -102,13 +88,15 @@
                     <a href="#"> Terms</a>
                     <a href="#"> Privacy</a>
                 </div>
-                <p class="capitalize"> © copyright 2022 by liz</p>
+                <p class="capitalize"> © copyright 2020 by socol</p>
             </div>
         </div>
 
     </div>
 
+
     
+
     <!-- Scripts
     ================================================== -->
     <script src="{% static 'assets/js/tippy.all.min.js' %}"></script>
