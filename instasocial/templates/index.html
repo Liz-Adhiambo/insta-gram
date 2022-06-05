@@ -1,17 +1,14 @@
+{%extends 'base.html'%}
 {% load static %}
-
+{%block content%}
 <!DOCTYPE html>
 <html lang="en">
 
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'favicon.png' %}" rel="icon" type="image/png">
-    <title>Home</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    
+    
+    
     <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
@@ -20,6 +17,8 @@
 </head>
 
 <body>
+   
+    {%include 'navbar.html'%}
 
             <header>
                 <div class="header_inner">
@@ -217,3 +216,5 @@
 
 
 </html>
+
+{%endblock content%}
