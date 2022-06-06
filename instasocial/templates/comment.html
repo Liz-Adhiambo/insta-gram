@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{% load static %}
+
+
+
+
+{%block content%}
+<div class="container">
+<img
+            src={%static 'assets1/logo.png'%}
+            height="70"
+            alt=""
+            loading="lazy"
+          />
+        </a>
+        
+        <a class="text-reset me-3" href="/">
+            <i class="fas fa-home fa-2x"></i>
+        </a>
+</div>
+<div class='container shadow'>
+
+    <form action="" method="post" >
+    {% csrf_token %}
+    {{ form.as_p }}
+        <input type="submit" name="submit">
+    </div>
+    </form>
+
+</div>
+
+    {%endblock content%}
+
+
+</body>

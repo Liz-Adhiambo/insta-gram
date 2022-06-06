@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from.views import AddCommentView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -13,6 +14,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('signin/', views.signin, name='signin'),
     path('logout/', views.logout, name='logout'),
+    path('comment/', AddCommentView.as_view(), name='comment'),
 
     
 ]

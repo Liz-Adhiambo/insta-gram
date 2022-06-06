@@ -1,11 +1,15 @@
 import random
-from django.shortcuts import render,redirect
+
+from django.urls import reverse_lazy
+from.forms import CommentForm
+from django.views.generic import CreateView
+from django.shortcuts import get_object_or_404, render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from itertools import chain
-from.models import FollowersCount, Post, Profile,LikePost
+from.models import  Comment, FollowersCount, Post, Profile,LikePost
 
 @login_required(login_url='signin')
 def index(request):
@@ -252,3 +256,29 @@ def search(request):
         
         username_profile_list = list(chain(*username_profile_list))
     return render(request, 'search.html', {'user_profile': user_profile, 'username_profile_list': username_profile_list})
+
+
+class AddCommentView(CreateView):
+    model=Comment
+    form_class=CommentForm
+
+    template_name='comment.html'
+    # fields='__all__'
+    def form_valid(self,form):
+        form.instance.post_id=self.request.post
+        super().form_valid(form)
+    success_url=reverse_lazy('index')
+
+# def add_comment(request,pk):
+#     eachpost=Post.objects.get(id=pk)
+
+#     form=CommentForm()
+#     context={'form':form
+#     }
+
+#     return render(request,'comment.html',context)
+
+
+
+
+
