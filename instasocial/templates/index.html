@@ -7,108 +7,71 @@
 <body>
    
     {%include 'navbar.html'%}
+    
 
     <div class="container ">
         <div class="row">
             <div class="col-md-8">
-                .col-md-8
+                
                 {% for post in posts reversed %}
-                    <div class="col-md-8">
-    
-                        <!-- post header-->
-                        <div class="">
-                            <div class="">
-                                
-                                <span class="block font-semibold "><a href="/profile/{{post.user}}">@{{post.user}}</a></span>
-                            </div>
-                            <div>
-                                <a href="#"> <i class="icon-feather-more-horizontal text-2xl hover:bg-gray-200 rounded-full p-2 transition -mr-1 "></i> </a>
-                                <div class="bg-white w-56 shadow-md mx-auto p-2 mt-12 rounded-md text-gray-500 hidden text-base border border-gray-100  " uk-drop="mode: hover;pos: top-right">
-                              
-                                    <ul class="space-y-1">
-                                      
-                                      <li> 
-                                          <a href="#" class="flex items-center px-3 py-2 text-red-500 hover:bg-red-100 hover:text-red-500 rounded-md ">
-                                           <i class="uil-trash-alt mr-1"></i>  Delete Post
-                                          </a> 
-                                      </li>
-                                    </ul>
-                                
-                                </div>
-                              </div>
-                            </div>
-    
-                            <div uk-lightbox>
-                                <a href="{{post.image.url}}">  
-                                    <img src="{{post.image.url}}" alt="">
-                                </a>
-                            </div>
-                            
-    
-                            <div class="py-3 px-4 space-y-3"> 
-                               
-                                <div class="flex space-x-4 lg:font-bold">
-                                    <a href="/like-post?post_id={{post.id}}" class="flex items-center space-x-2">
-                                        <div class="p-2 rounded-full text-black">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="25" height="25" class="">
-                                                <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z" />
-                                            </svg>
-                                            {% if post.no_of_likes == 0 %}
-                                            <p>No likes</p>
-                                            {% elif post.no_of_likes == 1 %}
-                                            <p>Liked by {{post.no_of_likes}} person</p>
-                                            {% else %}
-                                            <p>Liked by {{post.no_of_likes}} people</p>
-                                            {% endif %}
-                                        </div>
-                                        
-                                    </a>
-                                    
-                                    <a href="{{post.image.url}}" class="flex items-center space-x-2 flex-1 justify-end" download>
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="25" height="25" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><g fill="currentColor"><path d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v6h-2a.5.5 0 0 0-.354.854l2.5 2.5a.5.5 0 0 0 .708 0l2.5-2.5A.5.5 0 0 0 10.5 7.5h-2v-6z"/></g></svg>
-                                        
-                                    </a>
-                                </div>
-                                
-
-                                <p>
-                                    <a href="/profile/{{post.user}}"><strong>{{post.user}}</strong></a> {{post.caption}}
-                                </p>
-
-                                
-    
-                            </div>
-    
-                        </div>
-                        {% endfor %}
+                <div class="card mb-3">
+                    <a href="{{post.image.url}}">
+                    <img src="{{post.image.url}}" class="card-img-top" alt="Wild Landscape"/></a>
+                    <div class="card-body">
+                      <h5 class="card-title"><a href="/profile/{{post.user}}">@{{post.user}}</a></h5>
+                      <a href="/like-post?post_id={{post.id}}" class="flex items-center space-x-2">
+                       <i class="fas fa-heart"></i>
+                        {% if post.no_of_likes == 0 %}
+                        <p>No likes</p>
+                        {% elif post.no_of_likes == 1 %}
+                        <p>Liked by {{post.no_of_likes}} person</p>
+                        {% else %}
+                        <p>Liked by {{post.no_of_likes}} people</p>
+                        {% endif %}
+                      </a>
+                      <p class="card-text">
+                        <a href="/profile/{{post.user}}"><strong>{{post.user}}</strong></a> {{post.caption}}
+                      </p>
+                      <p class="card-text">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                      </p>
+                    </div>
+                  </div>
+                  {% endfor %}
             </div>
             <div class="col-md-4">
-                .col-md-4
-                <h2 class="font-semibold text-lg">Users You Can Follow</h2>
-                                <!-- <a href="#"> Refresh</a> -->
-                            </div>
-                           
-                            <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 ">
+                
+            <h2 class="font-semibold text-lg">Users You Can Follow</h2>
+                            <!-- <a href="#"> Refresh</a> -->
+                        
+                        <div class="divide-gray-300 divide-gray-50 divide-opacity-50 divide-y px-4 ">
 
-                                {% for suggestion in suggestions_username_profile_list %}
-                                <div class="flex items-center justify-between py-3">
-                                    <div class="flex flex-1 items-center space-x-4">
-                                        <a href="/profile/{{suggestion.user}}">
-                                            <img src="{{suggestion.profileimg.url}}" class="bg-gray-200 rounded-full w-10 h-10">
-                                        </a>
-                                        <div class="flex flex-col">
-                                            <span class="block capitalize font-semibold"> {{suggestion.user}} </span>
-                                            <span class="block capitalize text-sm"> {{suggestion.bio}} </span>
-                                        </div>
+                            {% for suggestion in suggestions_username_profile_list %}
+                            <div class="">
+                                <div class="">
+                                    <a href="/profile/{{suggestion.user}}">
+                                        <img src="{{suggestion.profileimg.url}}" class="rounded-circle"height="25">
+                                    </a>
+                                    <div class="flex flex-col">
+                                        <span class=""> {{suggestion.user}} </span>
+                                        <span class=""> {{suggestion.bio}} </span>
                                     </div>
-                                    
-                                    <a href="/profile/{{suggestion.user}}" class="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 "> View User </a>
                                 </div>
-                                {% endfor %}
+                                
+                                <a href="/profile/{{suggestion.user}}" class="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 "> View User </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                        
 
             </div>
-          </div>
-
+        </div>
+    </div>
+        
+    
 
     
 
