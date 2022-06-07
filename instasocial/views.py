@@ -25,7 +25,7 @@ def index(request):
         user_following_list.append(users.user)
 
     for usernames in user_following_list:
-        feed_lists = Post.objects.filter(user=usernames)
+        feed_lists = Post.objects.all()
         feed.append(feed_lists)
 
     feed_list = list(chain(*feed))
@@ -278,7 +278,12 @@ class AddCommentView(CreateView):
 
 #     return render(request,'comment.html',context)
 
+# def comment(request,post_id):
+#     post=Post.objects.get(id=post_id)
 
+#     if request.method == 'POST':
+#         comment_form=CommentForm(request.POST,request.FILES)
+    
 
 
 

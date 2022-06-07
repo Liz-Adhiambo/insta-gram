@@ -12,13 +12,55 @@
     <div class="container ">
         <div class="row">
             <div class="col-md-8">
-                
+                <small>Welcome To instagram follow someone to view posts</small>
                 {% for post in posts reversed %}
                 <div class="card mb-3">
+                    <h5 class="card-title"><a href="/profile/{{post.user}}">@{{post.user}}</a></h5>
                     <a href="{{post.image.url}}">
                     <img src="{{post.image.url}}" class="card-img-top" alt="Wild Landscape"/></a>
                     <div class="card-body">
-                      <h5 class="card-title"><a href="/profile/{{post.user}}">@{{post.user}}</a></h5>
+                      
+                      <!-- Button trigger modal -->
+                      <a type="button" class="" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                        <i class="far fa-comment"></i>
+                      </a>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Only admin can add comments for now .Option coming soon for users</h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">...
+                                <div class='container shadow'>
+
+                                    <a href={%url 'comment'  %}><p>Add Comment<p></a>
+                                
+                                    <br>
+                                   {%if not post.comments.all %}
+                                   No comments yet---
+                                   <a href'#'>Add one</a>
+        
+                                   {%else%}
+                                   {%for comment in post.comments.all%}
+                                   {{comment.name}}
+                                   <br>
+                                   {{comment.date_added}}
+                                   <br>
+                                   {{comment.body}}
+                                   <br>
+                                   {%endfor%}
+                                   {%endif%}
+                                </div> 
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div><i class="fas fa-paper-plane"></i>
                       <a href="/like-post?post_id={{post.id}}" class="flex items-center space-x-2">
                        <i class="fas fa-heart"></i>
                         {% if post.no_of_likes == 0 %}
@@ -29,57 +71,17 @@
                         <p>Liked by {{post.no_of_likes}} people</p>
                         {% endif %}
                       </a>
+                      
                       <p class="card-text">
                         <a href="/profile/{{post.user}}"><strong>{{post.user}}</strong></a> {{post.caption}}
                       </p>
                       <p class="card-text">
                         <small class="text-muted">{{post.created_at}}</small>
                       </p>
+                      
                      
                         
-                        <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-                                Add / view comments
-                            </button>
-                            
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Only admin can add comments for now .Option coming soon for users</h5>
-                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">...
-                                        <div class='container shadow'>
-
-                                            <a href={%url 'comment'  %}><p>Add Comment<p></a>
-                                        
-                                            <br>
-                                           {%if not post.comments.all %}
-                                           No comments yet---
-                                           <a href'#'>Add one</a>
-                
-                                           {%else%}
-                                           {%for comment in post.comments.all%}
-                                           {{comment.name}}
-                                           <br>
-                                           {{comment.date_added}}
-                                           <br>
-                                           {{comment.body}}
-                                           <br>
-                                           {%endfor%}
-                                           {%endif%}
-                                        </div> 
-                                        
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
+                        
                         
                       
                       
@@ -97,17 +99,17 @@
 
                             {% for suggestion in suggestions_username_profile_list %}
                             <div class="">
-                                <div class="">
+                                <div class="container mb-3">
                                     <a href="/profile/{{suggestion.user}}">
                                         <img src="{{suggestion.profileimg.url}}" class="rounded-circle"height="25">
                                     </a>
-                                    <div class="flex flex-col">
-                                        <span class=""> {{suggestion.user}} </span>
-                                        <span class=""> {{suggestion.bio}} </span>
-                                    </div>
+                                    <span>
+                                    <span class=""> @{{suggestion.user}} </span>
+                                    <a href="/profile/{{suggestion.user}}" class="btn " style='margin-left: 10px;'> View User </a> 
+                                    
                                 </div>
                                 
-                                <a href="/profile/{{suggestion.user}}" class="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 "> View User </a>
+                                
                             </div>
                             {% endfor %}
                         </div>
