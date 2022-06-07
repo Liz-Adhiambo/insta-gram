@@ -36,7 +36,7 @@
                             <div class="modal-body">...
                                 <div class='container shadow'>
 
-                                    <a href={%url 'comment'  %}><p>Add Comment<p></a>
+                                    <a href={% url 'viewpost' post.id%}><p>Add Comment<p></a>
                                 
                                     <br>
                                    {%if not post.comments.all %}

@@ -1,5 +1,5 @@
 import random
-
+from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse_lazy
 from.forms import CommentForm
 from django.views.generic import CreateView
@@ -15,6 +15,7 @@ from.models import  Comment, FollowersCount, Post, Profile,LikePost
 def index(request):
     user_object=User.objects.get(username=request.user.username)
     user_profile=Profile.objects.get(user=user_object)
+    images = Post.objects.all()
 
     user_following_list = []
     feed = []
@@ -56,7 +57,7 @@ def index(request):
     suggestions_username_profile_list = list(chain(*username_profile_list))
 
 
-    return render(request,'index.html' ,{'user_profile':user_profile,'posts':feed_list,'suggestions_username_profile_list': suggestions_username_profile_list[:4]})
+    return render(request,'index.html' ,{"images":images,'user_profile':user_profile,'posts':feed_list,'suggestions_username_profile_list': suggestions_username_profile_list[:4]})
 
 
 def signup(request):
@@ -265,7 +266,7 @@ class AddCommentView(CreateView):
     template_name='comment.html'
     # fields='__all__'
     def form_valid(self,form):
-        form.instance.post_id=self.request.post
+        form.instance.post_id=self.kwargs['pk']
         super().form_valid(form)
     success_url=reverse_lazy('index')
 
@@ -284,6 +285,36 @@ class AddCommentView(CreateView):
 #     if request.method == 'POST':
 #         comment_form=CommentForm(request.POST,request.FILES)
     
+@login_required
+def view_post(request,pk):
+    # post_id = request.GET.get('id')
+    post = Post.objects.get(id=pk)
+    
+    # try:
+    #     # post = Post.objects.get(id=post_id)
+    # comments = Comment.objects.filter(post__icontains=id)
+    #     # print(comments)
+        
+    # except ObjectDoesNotExist:  
+    #     comments = None
+    #     post=None
+    
+    context = {
+        'post':post,
+        # "comments":comments
+        }   
+    return render(request,'viewpost.html',context)
 
+def add_comment(request,post_id):
+    current_user = request.user
+
+    if request.method == 'POST':
+        body= request.POST.get('comment')
+        post = Post.objects.get(id=post_id)
+        name = User.objects.get(username=current_user.username)
+        Comment.objects.create(body = body, post = post, name = name)
+
+        
+    return render(request,'index.html') 
 
 

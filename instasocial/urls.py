@@ -14,7 +14,9 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('signin/', views.signin, name='signin'),
     path('logout/', views.logout, name='logout'),
-    path('comment/', AddCommentView.as_view(), name='comment'),
+    path('post/<str:pk>/comment/', AddCommentView.as_view(), name='comment'),
+    path('post/<str:pk>/',views.view_post, name='viewpost'),
+    path('add_comment/<str:post_id>/',views.add_comment, name='add_comment'),
 
     
 ]
