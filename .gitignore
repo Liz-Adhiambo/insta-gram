@@ -1,3 +1,4 @@
 gram-venv/
 *pyc
-insta_project/settings.py
+insta_project/settingss.py
+.env
