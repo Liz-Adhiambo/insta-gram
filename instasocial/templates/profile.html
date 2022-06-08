@@ -69,7 +69,7 @@
 <div class="container mb-3">
 	{% for post in user_posts %}
 	<!-- Button trigger modal -->
-	<a class="strip" href="{{post.image.url}}" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
+	<a class="strip" href="{% url 'viewpost' post.id%}" title="" data-strip-group="mygroup" data-strip-group-options="loop: false">
 		<img src="{{post.image.url}}" style="height: 250px; width: 300px;" alt=""></a>
 {% endfor %}
   

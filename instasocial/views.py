@@ -289,6 +289,7 @@ class AddCommentView(CreateView):
 def view_post(request,pk):
     # post_id = request.GET.get('id')
     post = Post.objects.get(id=pk)
+    comments=Comment.objects.filter(post__id=pk)
     
     # try:
     #     # post = Post.objects.get(id=post_id)
@@ -301,7 +302,7 @@ def view_post(request,pk):
     
     context = {
         'post':post,
-        # "comments":comments
+        "comments":comments
         }   
     return render(request,'viewpost.html',context)
 
@@ -315,6 +316,5 @@ def add_comment(request,post_id):
         Comment.objects.create(body = body, post = post, name = name)
 
         
-    return render(request,'index.html') 
-
+    return redirect('/post/'+post_id)
 

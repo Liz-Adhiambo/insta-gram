@@ -14,44 +14,46 @@
     <div class="col-md-6 comments-container">
       <div class="user">
         <div class="image">
-          <img src="{{post.user.profileimg.url}}" alt="" />
+          <img src="{{post.user_profile.profileimg.url}}" alt="" />
         </div>
         <div class="user_name ml-1 mb-2">{{post.user}}</div>
       </div>
       <hr />
       <div class="post">
-        <span class="user_name"> {{post.user.}} </span>
-        {{post.user}}
+        
         <p class="post_caption">{{post.caption}}</p>
       </div>
       <div class="comments-wrapper">
         <h4 class="text-center">Comments</h4>
         {%if not post.comments.all %}
-                                   No comments yet---
-                                   <a href'#'>Add one</a>
+        There are No comments yet--- add one<br>
+
         
-                                   {%else%}
-                                   {%for comment in post.comments.all%}
-                                   {{comment.name}}
-                                   <br>
-                                   {{comment.date_added}}
-                                   <br>
-                                   {{comment.body}}
-                                   <br>
-                                   {%endfor%}
-                                   {%endif%}
+        
+
+        {%else%}
+        {%for comment in post.comments.all%}
+        <strong>{{comment.name}}</strong>
+        <br>
+        {{comment.body}}
+        <br>
+        <small>{{comment.date_added}}</small>
+       
+        <br>
+        {%endfor%}
+        {%endif%}
       </div>
 
       
       </div>
-      <h5>{{image.likes.count}} likes</h5>
-      <span class="text-muted">{{image.created}}</span>
+      <h5>{{post.no_of_likes}} likes</h5>
+      <span class="text-muted">{{post.created_at}}</span>
       <div class="comments-form mt-2">
         <form action="{%url 'add_comment' post.id%}" method="POST">
           {%csrf_token%}
           <div class="input-group mb-3">
             <input type="text" class="form-control" name="comment" placeholder="Add comment" />
-            <button class="btn btn-success" type="submit">Post</button>
+            <button class="btn btn-danger" type="submit">Comment</button>
           </div>
         </form>
       </div>

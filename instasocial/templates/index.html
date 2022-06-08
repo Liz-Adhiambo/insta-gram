@@ -12,16 +12,16 @@
     <div class="container ">
         <div class="row">
             <div class="col-md-8">
-                <small>Welcome To instagram follow someone to view posts</small>
+                
                 {% for post in posts reversed %}
                 <div class="card mb-3">
                     <h5 class="card-title"><a href="/profile/{{post.user}}">@{{post.user}}</a></h5>
-                    <a href="{{post.image.url}}">
+                    <a href={% url 'viewpost' post.id%}>
                     <img src="{{post.image.url}}" class="card-img-top" alt="Wild Landscape"/></a>
                     <div class="card-body">
                       
                       <!-- Button trigger modal -->
-                      <a type="button" class="" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                      <a  href = {% url 'viewpost' post.id%} type="button" class="" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
                         <i class="far fa-comment"></i>
                       </a>
                     
@@ -30,29 +30,32 @@
                         <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Only admin can add comments for now .Option coming soon for users</h5>
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
                             <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">...
                                 <div class='container shadow'>
+                                    
 
-                                    <a href={% url 'viewpost' post.id%}><p>Add Comment<p></a>
+                                    Click image to add comment
                                 
                                     <br>
-                                   {%if not post.comments.all %}
-                                   No comments yet---
-                                   <a href'#'>Add one</a>
-        
-                                   {%else%}
-                                   {%for comment in post.comments.all%}
-                                   {{comment.name}}
-                                   <br>
-                                   {{comment.date_added}}
-                                   <br>
-                                   {{comment.body}}
-                                   <br>
-                                   {%endfor%}
-                                   {%endif%}
+                                    {%if not post.comments.all %}
+                                    There are No comments yet--- add one<br>
+                                    
+                                    Refresh and click the home button after adding a comment.
+                                    
+                            
+                                    {%else%}
+                                    {%for comment in post.comments.all%}
+                                    {{comment.name}}
+                                    <br>
+                                    {{comment.date_added}}
+                                    <br>
+                                    {{comment.body}}
+                                    <br>
+                                    {%endfor%}
+                                    {%endif%}
                                 </div> 
                                 
                             </div>
@@ -89,7 +92,12 @@
                   </div>
                   
                   {% endfor %}
+                  {%if not post in posts%}
+                <small>Welcome To instagram follow someone to view posts</small>
+                {%else%}
+                  {%endif%}
             </div>
+            
             <div class="col-md-4">
                 
             <h2 class="font-semibold text-lg">Users You Can Follow</h2>
